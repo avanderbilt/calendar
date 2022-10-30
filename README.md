@@ -44,8 +44,7 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`cal hello PERSON`](#cal-hello-person)
-* [`cal hello world`](#cal-hello-world)
+* [`cal hello [PERSON]`](#cal-hello-person)
 * [`cal help [COMMAND]`](#cal-help-command)
 * [`cal plugins`](#cal-plugins)
 * [`cal plugins:install PLUGIN...`](#cal-pluginsinstall-plugin)
@@ -55,47 +54,38 @@ USAGE
 * [`cal plugins:uninstall PLUGIN...`](#cal-pluginsuninstall-plugin)
 * [`cal plugins:uninstall PLUGIN...`](#cal-pluginsuninstall-plugin-1)
 * [`cal plugins:uninstall PLUGIN...`](#cal-pluginsuninstall-plugin-2)
-* [`cal plugins update`](#cal-plugins-update)
+* [`cal plugins:update`](#cal-pluginsupdate)
+* [`cal today`](#cal-today)
 
-## `cal hello PERSON`
+## `cal hello [PERSON]`
 
-Say hello
+Say hello to a friend or to the world, from someone or from no one.
 
 ```
 USAGE
-  $ cal hello [PERSON] -f <value>
+  $ cal hello [PERSON] [-f <value>]
 
 ARGUMENTS
-  PERSON  Person to say hello to
+  PERSON  The person hello is being said to.
 
 FLAGS
-  -f, --from=<value>  (required) Who is saying hello
+  -f, --from=<value>  The person who is saying hello.
 
 DESCRIPTION
-  Say hello
+  Say hello to a friend or to the world, from someone or from no one.
 
 EXAMPLES
-  $ oex hello friend --from oclif
-  hello friend from oclif! (./src/commands/hello/index.ts)
+  $ cal hello Arthur --from Jessica
+  Hello Arthur from Jessica!
+
+  $ cal hello Arthur
+  Hello Arthur!
+
+  $ cal hello
+  Hello world!
 ```
 
-_See code: [dist/commands/hello/index.ts](https://github.com/avanderbilt/calendar/blob/v0.0.0/dist/commands/hello/index.ts)_
-
-## `cal hello world`
-
-Say hello world
-
-```
-USAGE
-  $ cal hello world
-
-DESCRIPTION
-  Say hello world
-
-EXAMPLES
-  $ cal hello world
-  hello world! (./src/commands/hello/world.ts)
-```
+_See code: [dist/commands/hello.ts](https://github.com/avanderbilt/calendar/blob/v0.0.0/dist/commands/hello.ts)_
 
 ## `cal help [COMMAND]`
 
@@ -165,7 +155,7 @@ DESCRIPTION
 
 
 ALIASES
-  $ cal plugins add
+  $ cal plugins:add
 
 EXAMPLES
   $ cal plugins:install myplugin 
@@ -197,6 +187,8 @@ EXAMPLES
   $ cal plugins:inspect myplugin
 ```
 
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.1.4/src/commands/plugins/inspect.ts)_
+
 ## `cal plugins:install PLUGIN...`
 
 Installs a plugin into the CLI.
@@ -225,7 +217,7 @@ DESCRIPTION
 
 
 ALIASES
-  $ cal plugins add
+  $ cal plugins:add
 
 EXAMPLES
   $ cal plugins:install myplugin 
@@ -234,6 +226,8 @@ EXAMPLES
 
   $ cal plugins:install someuser/someplugin
 ```
+
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.1.4/src/commands/plugins/install.ts)_
 
 ## `cal plugins:link PLUGIN`
 
@@ -262,28 +256,7 @@ EXAMPLES
   $ cal plugins:link myplugin
 ```
 
-## `cal plugins:uninstall PLUGIN...`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ cal plugins:uninstall PLUGIN...
-
-ARGUMENTS
-  PLUGIN  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ cal plugins unlink
-  $ cal plugins remove
-```
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.1.4/src/commands/plugins/link.ts)_
 
 ## `cal plugins:uninstall PLUGIN...`
 
@@ -304,8 +277,8 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ cal plugins unlink
-  $ cal plugins remove
+  $ cal plugins:unlink
+  $ cal plugins:remove
 ```
 
 ## `cal plugins:uninstall PLUGIN...`
@@ -327,17 +300,42 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ cal plugins unlink
-  $ cal plugins remove
+  $ cal plugins:unlink
+  $ cal plugins:remove
 ```
 
-## `cal plugins update`
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.1.4/src/commands/plugins/uninstall.ts)_
+
+## `cal plugins:uninstall PLUGIN...`
+
+Removes a plugin from the CLI.
+
+```
+USAGE
+  $ cal plugins:uninstall PLUGIN...
+
+ARGUMENTS
+  PLUGIN  plugin to uninstall
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Removes a plugin from the CLI.
+
+ALIASES
+  $ cal plugins:unlink
+  $ cal plugins:remove
+```
+
+## `cal plugins:update`
 
 Update installed plugins.
 
 ```
 USAGE
-  $ cal plugins update [-h] [-v]
+  $ cal plugins:update [-h] [-v]
 
 FLAGS
   -h, --help     Show CLI help.
@@ -346,6 +344,22 @@ FLAGS
 DESCRIPTION
   Update installed plugins.
 ```
+
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.1.4/src/commands/plugins/update.ts)_
+
+## `cal today`
+
+This is information about today.
+
+```
+USAGE
+  $ cal today
+
+DESCRIPTION
+  This is information about today.
+```
+
+_See code: [dist/commands/today.ts](https://github.com/avanderbilt/calendar/blob/v0.0.0/dist/commands/today.ts)_
 <!-- commandsstop -->
 * [`oex hello PERSON`](#oex-hello-person)
 * [`oex hello world`](#oex-hello-world)
