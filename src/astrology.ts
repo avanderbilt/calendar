@@ -6,21 +6,23 @@ import chalk from 'chalk'
 
 export default class Astrology {
   private command: Command
-  private now: Date
-  constructor(command: Command, now: Date) {
+  constructor(command: Command) {
     this.command = command
-    this.now = now
   }
 
-  public printSunTimesForToday(): void {
-    const sunTimes = suncalc.getTimes(this.now, Configuration.latitude, Configuration.longitude)
+  public printSunTimesFor = (when: Date | undefined): void => {
+    if (!when) {
+      throw new Error('No date was provided.')
+    }
+
+    const sunTimes = suncalc.getTimes(when, Configuration.latitude, Configuration.longitude)
 
     const sunrise = moment(sunTimes.sunrise)
     const solarNoon = moment(sunTimes.solarNoon)
     const sunset = moment(sunTimes.sunset)
     const solarMidnight = moment(sunTimes.nadir)
 
-    const sunPhase = moment(this.now).isAfter(sunrise) && moment(this.now).isBefore(sunset) ? 'up' : 'down'
+    const sunPhase = moment(when).isAfter(sunrise) && moment(when).isBefore(sunset) ? 'up' : 'down'
 
     this.command.log(`\n${chalk.bold.yellowBright('The Sun')} ${chalk.red('♢')} ${chalk.gray(`The sun is currently ${sunPhase}.`)}\n`)
 
@@ -37,10 +39,14 @@ export default class Astrology {
     }
   }
 
-  public printMoonTimesForToday = (): void => {
-    const startingMoonPhase = suncalc.getMoonIllumination(moment(this.now).startOf('day').toDate()).phase
-    const endingMoonPhase = suncalc.getMoonIllumination(moment(this.now).endOf('day').toDate()).phase
-    const currentMoonPhase = suncalc.getMoonIllumination(this.now).phase
+  public printMoonTimesFor = (when: Date | undefined): void => {
+    if (!when) {
+      throw new Error('No date was provided.')
+    }
+
+    const startingMoonPhase = suncalc.getMoonIllumination(moment(when).startOf('day').toDate()).phase
+    const endingMoonPhase = suncalc.getMoonIllumination(moment(when).endOf('day').toDate()).phase
+    const currentMoonPhase = suncalc.getMoonIllumination(when).phase
 
     const newMoonPhase = 0
     const firstQuarterMoonPhase = 0.25
@@ -67,7 +73,7 @@ export default class Astrology {
       moonPhase = 'Waning Crescent'
     }
 
-    const moonTimes = suncalc.getMoonTimes(this.now, Configuration.latitude, Configuration.longitude)
+    const moonTimes = suncalc.getMoonTimes(when, Configuration.latitude, Configuration.longitude)
 
     const moonrise = moment(moonTimes.rise)
     const moonset = moment(moonTimes.set)

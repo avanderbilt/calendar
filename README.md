@@ -34,7 +34,7 @@ USAGE
 * [`cal plugins:uninstall PLUGIN...`](#cal-pluginsuninstall-plugin-1)
 * [`cal plugins:uninstall PLUGIN...`](#cal-pluginsuninstall-plugin-2)
 * [`cal plugins:update`](#cal-pluginsupdate)
-* [`cal today`](#cal-today)
+* [`cal today [WHEN]`](#cal-today-when)
 
 ## `cal hello [PERSON]`
 
@@ -326,13 +326,20 @@ DESCRIPTION
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.1.6/src/commands/plugins/update.ts)_
 
-## `cal today`
+## `cal today [WHEN]`
 
 This is information about today.
 
 ```
 USAGE
-  $ cal today
+  $ cal today [WHEN] [-s | -m]
+
+ARGUMENTS
+  WHEN  Specify a specific time.
+
+FLAGS
+  -m, --moon  Show lunar information only.
+  -s, --sun   Show solar information only.
 
 DESCRIPTION
   This is information about today.

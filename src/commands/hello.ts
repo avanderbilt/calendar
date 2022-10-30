@@ -20,15 +20,15 @@ ${Hello.output()}`,
 
   public static args = [{name: 'person', description: 'The person hello is being said to.', required: false}]
 
-  private static output(person?: string, from?: string): string {
-    const world = !person && !from
-    return `Hello${person ? ` ${person}` : ''}${from ? ` from ${from}` : ''}${world ? ' world' : ''}!`
-  }
-
   public async run(): Promise<void> {
     const {args, flags} = await this.parse(Hello)
     const output = Hello.output(args.person, flags.from)
     this.log(output)
+  }
+
+  private static output(person?: string, from?: string): string {
+    const world = !person && !from
+    return `Hello${person ? ` ${person}` : ''}${from ? ` from ${from}` : ''}${world ? ' world' : ''}!`
   }
 }
 
