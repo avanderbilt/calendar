@@ -7,7 +7,7 @@
     "cal": "./bin/run"
   },
   "homepage": "https://github.com/avanderbilt/calendar",
-  "license": "GPL",
+  "license": "0BSD",
   "main": "dist/index.js",
   "repository": "avanderbilt/calendar",
   "files": [
