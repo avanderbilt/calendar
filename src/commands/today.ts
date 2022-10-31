@@ -1,5 +1,5 @@
 import {Command, Flags} from '@oclif/core'
-import Calendar from '../calendar'
+import Calendar, {Easter} from '../calendar'
 import Astrology from '../astrology'
 import moment from 'moment'
 import chalk from 'chalk'
@@ -33,12 +33,17 @@ export default class Today extends Command {
     this.log(output)
   }
 
+  private getEaster = (when: Date) => {
+    const easter = new Easter()
+    return easter.getDateFor(when.getFullYear())
+  }
+
   public run = async (): Promise<void> => {
     const {args, flags} = await this.parse(Today)
 
-    const parsedWhen = chrono.parseDate(args.when)
+    const parsedWhen = args.when ? chrono.parseDate(args.when) : null
 
-    if (!parsedWhen) {
+    if (args.when && !parsedWhen) {
       this.warn(`"${args.when}" is not a valid date. Using the current date and time.`)
     }
 
@@ -60,5 +65,7 @@ export default class Today extends Command {
     if (!flags.sun) {
       astrology.printMoonTimesFor(when)
     }
+
+    const easter = this.getEaster(when)
   }
 }

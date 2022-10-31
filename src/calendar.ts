@@ -11,6 +11,29 @@ export class Day {
   }
 }
 
+export class Easter {
+  // https://www.irt.org/articles/js052/index.htm
+  public getDateFor = (year: number): Date => {
+    const c = Math.floor(year / 100)
+    const n = year - (19 * Math.floor(year / 19))
+    const k = Math.floor((c - 17) / 25)
+    let i = c - Math.floor(c / 4) - Math.floor((c - k) / 3) + (19 * n) + 15
+    i -= (30 * Math.floor((i / 30)))
+    i -= Math.floor(i / 28) * (1 - (Math.floor(i / 28) * Math.floor(29 / (i + 1)) * Math.floor((21 - n) / 11)))
+    let j = year + Math.floor(year / 4) + i + 2 - c + Math.floor(c / 4)
+    j -= 7 * Math.floor(j / 7)
+    const l = i - j
+    const month = 3 + Math.floor((l + 40) / 44) - 1
+    const day = l + 28 - (31 * Math.floor(month / 4))
+
+    return new Date(year, month, day)
+  }
+
+  private padout = (number: number): string => {
+    return (number < 10) ? '0' + number.toString() : number.toString()
+  }
+}
+
 export class Week {
   public days: Day[]
   constructor(days: Day[]) {

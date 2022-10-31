@@ -10,6 +10,11 @@ export default class Astrology {
     this.command = command
   }
 
+  public planetaryHours = (sunrise: Date, sunset:Date): void => {
+    const differenceInMinutes = (sunset.getTime() - sunrise.getTime()) / 60_000
+    console.log(differenceInMinutes / 60)
+  }
+
   public printSunTimesFor = (when: Date | undefined): void => {
     if (!when) {
       throw new Error('No date was provided.')
@@ -21,6 +26,8 @@ export default class Astrology {
     const solarNoon = moment(sunTimes.solarNoon)
     const sunset = moment(sunTimes.sunset)
     const solarMidnight = moment(sunTimes.nadir)
+
+    this.planetaryHours(sunrise.toDate(), sunset.toDate())
 
     const sunPhase = moment(when).isAfter(sunrise) && moment(when).isBefore(sunset) ? 'up' : 'down'
 
